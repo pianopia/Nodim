@@ -58,13 +58,13 @@ var sys;
           //ctx.arc(200, 100, 40, 0, Math.PI*2, false);
           //ctx.fill();
 
-          if (node.data.who == "sokusitsu")
-          { // ノードの色
+          //if (node.data.who == "sokusitsu")
+          //{ // ノードの色
             //ctx.fillStyle = "rgba(100,100,100,1)"
             ctx.fillStyle = "#4682b4"
             //gfx.oval(pt.x-w/2, pt.y-w/2, w,w, {fill:ctx.fillStyle})
             gfx.rect(pt.x-w/2, pt.y-15, w, 30, {fill:ctx.fillStyle})
-          }
+          //}
           nodeBoxes[node.name] = [pt.x-w/2, pt.y-11, w, 22]
 
           // draw the text

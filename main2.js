@@ -18,7 +18,7 @@ function createWindow () {
   }))
 
 
-  //win.webContents.openDevTools();
+  win.webContents.openDevTools();
   // win.loadFile("index.html");
 
   //このウインドウが閉じられたときの処理

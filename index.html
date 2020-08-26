@@ -74,57 +74,73 @@
       $("#keyword").val(null);
   }
 
-        var is_cui_box = false;
-        var terminal = new Terminal('terminal', {}, {
-            execute: function(cmd, args) {
-                switch (cmd) {
-                    case 'clear':
-                        terminal.clear();
-                        return '';
+  var is_cui_box = false;
+  var terminal = new Terminal('terminal', {}, {
+      execute: function(cmd, args) {
+          switch (cmd) {
+              case 'clear':
+                  terminal.clear();
+                  return '';
 
-                    case 'help':
-                        return 'Commands: clear, help, theme, ver or version<br>More help available <a class="external" href="http://github.com/SDA/terminal" target="_blank">here</a>';
+              case 'help':
+                  return 'Commands: clear, help, theme, ver or version<br>More help available <a class="external" href="http://github.com/SDA/terminal" target="_blank">here</a>';
 
-                    case 'theme':
-                        if (args && args[0]) {
-                            if (args.length > 1) return 'Too many arguments';
-                            else if (args[0].match(/^interlaced|modern|white$/)) { terminal.setTheme(args[0]); return ''; }
-                            else return 'Invalid theme';
-                        }
-                        return terminal.getTheme();
+              case 'theme':
+                  if (args && args[0]) {
+                      if (args.length > 1) return 'Too many arguments';
+                      else if (args[0].match(/^interlaced|modern|white$/)) { terminal.setTheme(args[0]); return ''; }
+                      else return 'Invalid theme';
+                  }
+                  return terminal.getTheme();
 
-                    case 'ver':
-                    case 'version':
-                        return '1.0.0';
-                    case 'add':
-                        if(args && args[0]) {
-                            if (args.length > 1) return 'Too many arguments';
-                            else { addBoardCmd(args[0]); }
-                        }
-                    case 'delete':
-                        if(args && args[0]) {
-                            if (args.length > 1) return 'Too many arguments';
-                            else { deleteBoardCmd(args[0]); }
-                        }
-                    default:
-                        // Unknown command.
-                        return false;
-                };
-            }
-        });
+              case 'ver':
+              case 'version':
+                  return '1.0.0';
+              case 'add':
+                  if(args && args[0]) {
+                      if (args.length > 1) return 'Too many arguments';
+                      else {
+                        sys.addNode(args[0]);
+                      }
+                  }
+                  return '';
+              case 'delete':
+                  if(args && args[0]) {
+                      if (args.length > 1) return 'Too many arguments';
+                      else { sys.deleteNode(args[0]); }
+                  }
+                  return '';
+              case 'connect':
+                  if(args && args[0] && args[1]) {
+                    if(args.length > 2) return 'Too many arguments';
+                    else { sys.addEdge(args[0], args[1]); }
+                  }
+                  return '';
+              case 'disconnect':
+                  if(args && args[0] && args[1]) {
+                    if(args.length > 2) return 'Too many arguments';
+                    else { sys.deleteEdge(args[0], args[1]); }
+                  }
+                  return '';
+              default:
+                  // Unknown command.
+                  return false;
+          };
+      }
+  });
 
-        function toggleCUI() {
-            if(is_cui_box == false) {
-                $("#cui_box").css("display", "block");
-                $("#gui_box").css("display", "none");
-                is_cui_box = true;
-                $("#cui_btn").innerHTML = "Go To GUI";
-            } else {
-                $("#cui_box").css("display", "none");
-                $("#gui_box").css("display", "block");
-                is_cui_box = false;
-                $("#cui_btn").innerHTML = "Go To CUI";
-            }
-        }
+  function toggleCUI() {
+      if(is_cui_box == false) {
+          $("#cui_box").css("display", "block");
+          $("#gui_box").css("display", "none");
+          is_cui_box = true;
+          $("#cui_btn").innerHTML = "Go To GUI";
+      } else {
+          $("#cui_box").css("display", "none");
+          $("#gui_box").css("display", "block");
+          is_cui_box = false;
+          $("#cui_btn").innerHTML = "Go To CUI";
+      }
+  }
     </script>
 </html>
